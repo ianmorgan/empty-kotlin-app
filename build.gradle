@@ -5,6 +5,9 @@ buildscript {
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
+        // for Spec - http://spekframework.org/docs/latest/
+        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0'
     }
 }
 plugins {
@@ -13,6 +16,8 @@ plugins {
 
 }
 apply plugin: 'kotlin'
+// Provides better repoprting of test results
+apply plugin: 'org.junit.platform.gradle.plugin'
 
 
 
@@ -47,9 +52,8 @@ dependencies {
     // good old junit if needed
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
-
-
 }
+
 compileKotlin {
     kotlinOptions {
         jvmTarget = "1.8"

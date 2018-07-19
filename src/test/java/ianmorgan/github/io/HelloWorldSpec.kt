@@ -13,7 +13,7 @@ import java.io.PrintStream
 @RunWith(JUnitPlatform::class)
 object HelloWorldSpec : Spek({
 
-    describe ("printing a greeting") {
+    describe ("Printing a greeting") {
 
         // make sure System.our is preserved
         lateinit var systemOut: PrintStream
@@ -31,20 +31,19 @@ object HelloWorldSpec : Spek({
             System.setOut(PrintStream(out))
 
             // execute
-            val args = arrayOf("Ian")
-            ianmorgan.github.io.main(args)
+            main(arrayOf("Ian"))
 
             // assert
             assert.that(out.toString(), equalTo("Hello, Ian\r\n"))
         }
 
-        it ("should just  Hello World if no name ") {
+        it ("should just Hello World if no name") {
             // setup
             val out = ByteArrayOutputStream()
             System.setOut(PrintStream(out))
 
             // execute
-            ianmorgan.github.io.main(arrayOf())
+            main(arrayOf())
 
             // assert
             assert.that(out.toString(), equalTo("Hello World\r\n"))
