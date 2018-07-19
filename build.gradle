@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = '1.2.41'
+    ext.kotlin_version = '1.2.51'
     repositories {
         mavenCentral()
     }
@@ -9,7 +9,7 @@ buildscript {
 }
 plugins {
     id 'java'
-    id "org.jetbrains.kotlin.jvm" version "1.2.41"
+    id "org.jetbrains.kotlin.jvm" version "1.2.51"
 
 }
 apply plugin: 'kotlin'
@@ -27,8 +27,28 @@ repositories {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+
+
+    // support for Spek BDD style tests
+    testCompile group: 'com.natpryce', name: 'hamkrest', version: '1.4.2.2'
+    testCompile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    testCompile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+    testCompile "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
+    testCompile ('org.jetbrains.spek:spek-api:1.1.5') {
+        exclude group: 'org.jetbrains.kotlin'
+    }
+    testRuntime ('org.jetbrains.spek:spek-junit-platform-engine:1.1.5') {
+        exclude group: 'org.junit.platform'
+        exclude group: 'org.jetbrains.kotlin'
+    }
+    testCompile ('org.junit.platform:junit-platform-runner:1.0.0')
+
+    // good old junit if needed
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+
+
 }
 compileKotlin {
     kotlinOptions {
