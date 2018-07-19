@@ -9,15 +9,14 @@ import org.junit.platform.runner.JUnitPlatform
 import org.junit.runner.RunWith
 import java.io.ByteArrayOutputStream
 import java.io.PrintStream
-import java.util.*
 
 @RunWith(JUnitPlatform::class)
 object HelloWorldSpec : Spek({
 
-    describe ("printing a greeting  ") {
+    describe ("printing a greeting") {
 
+        // make sure System.our is preserved
         lateinit var systemOut: PrintStream
-
         beforeEachTest {
             systemOut = System.out
         }
@@ -25,7 +24,6 @@ object HelloWorldSpec : Spek({
         afterEachTest {
             System.setOut(systemOut)
         }
-
 
         it ("should include name if provided") {
             // setup
@@ -40,7 +38,7 @@ object HelloWorldSpec : Spek({
             assert.that(out.toString(), equalTo("Hello, Ian\r\n"))
         }
 
-        it ("should say Hello World if no name ") {
+        it ("should just  Hello World if no name ") {
             // setup
             val out = ByteArrayOutputStream()
             System.setOut(PrintStream(out))
